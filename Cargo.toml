@@ -1,8 +1,32 @@
 [package]
 name = "aws-jwt-verify-rs"
 version = "0.1.0"
+authors = ["Piotr Morawski <contact@peter-morawski.de>"]
+license = "MIT or Apache-2.0"
+readme = "README.md"
+repository = "https://github.com/0xA537FD/aws-jwt-verify-rs"
+documentation = "https://docs.rs/aws-jwt-verify-rs"
+homepage = "https://github.com/0xA537FD/aws-jwt-verify-rs"
+description = """
+A port of the aws-jwt-verify library from AWS to Rust for verifying JWTs 
+signed by Amazon Cognito, and any OIDC-compatible IDP that signs JWTs 
+with RS256, RS384 and RS512.
+"""
+categories = ["authentication"]
+autotests = false
+exclude = ["/.github/*"]
 edition = "2021"
-
-# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+rust-version = "1.65"
 
 [dependencies]
+reqwest = { version = "0.11.24", optional = true }
+serde = { version = "1.0.197", optional = true }
+serde_json = { version = "1.0.114", optional = true }
+thiserror = "1.0.57"
+tinyjson = { version = "2.5.1", optional = true }
+
+[features]
+default = ["reqwest"]
+tinyjson = ["dep:tinyjson"]
+serde = ["dep:serde", "dep:serde_json"]
+reqwest = ["dep:reqwest"]
